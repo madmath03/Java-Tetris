@@ -32,6 +32,7 @@ public class TetrisFrame extends javax.swing.JFrame {
 				new JPanel[] { nextPanel1, nextPanel2, 
 						nextPanel3, nextPanel4, 
 						nextPanel5, nextPanel6 });
+        initCommandsPanel();
 	}
 
 	/**
@@ -49,7 +50,24 @@ public class TetrisFrame extends javax.swing.JFrame {
 				new JPanel[] { nextPanel1, nextPanel2, 
 						nextPanel3, nextPanel4, 
 						nextPanel5, nextPanel6 });
-	}
+        initCommandsPanel();
+    }
+    
+    /**
+     * Initialize command panels with Tetrion key strokes.
+     */
+    private void initCommandsPanel() {
+        this.commandTextArea.setText(
+            "TETRIS\n\nCommands:\n\n"
+            + "Hard: " + boardPanel.getHardDropKey() + "\n"
+            + "Soft: " + boardPanel.getSoftDropKey() + "\n"
+            + "Left: " + boardPanel.getLeftKey() + "\n"
+            + "Right: " + boardPanel.getRightKey() + "\n"
+            + "Rotate: " + boardPanel.getRotateLeftKey() 
+                + ", " + boardPanel.getRotateRightKey() + "\n"
+            + "Hold: " + boardPanel.getHoldKey() + "\n"
+            + "Pause: " + boardPanel.getPauseKey());
+    }
 
 	/**
 	 * This method is called from within the constructor to initialize the form.

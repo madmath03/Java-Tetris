@@ -11,14 +11,12 @@ import org.fun.game.tetris.Tetromino.Shape.RandomGenerator;
 /**
  * A Tetromino for the Tetris game.
  *
- * <p>
- * <strong>Tetrominoes</strong>, occasionally known alternately as Tetrads,
+ * <p><strong>Tetrominoes</strong>, occasionally known alternately as Tetrads,
  * Blocks, or Tetriminoes, are the blocks used in every known Tetris game. They
  * come in seven shapes, all of which can be rotated and then dropped.
  * </p>
  *
- * <p>
- * A tetromino, is a polyomino made of four square blocks. The seven one-sided
+ * <p>A tetromino, is a polyomino made of four square blocks. The seven one-sided
  * tetrominoes are:
  * </p>
  * <ul>
@@ -31,8 +29,7 @@ import org.fun.game.tetris.Tetromino.Shape.RandomGenerator;
  * <li>{@link Shape#Z}: Z-shape.</li>
  * </ul>
  * 
- * <p>
- * This class is based on <em>Jan Bodnar</em>'s
+ * <p>This class is based on <em>Jan Bodnar</em>'s
  * <a href="http://zetcode.com/tutorials/javagamestutorial/tetris/">Tetris game
  * clone in Java Swing</a>.
  * </p>

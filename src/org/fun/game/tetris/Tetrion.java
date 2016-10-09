@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.io.Closeable;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -28,8 +26,7 @@ import org.fun.music.midi_player.MidiPlayer;
  * The Tetrion is the frame that surrounds the playfield and the "machine" that
  * plays Tetris.
  * 
- * <p>
- * This class is based on <em>Jan Bodnar</em>'s
+ * <p>This class is based on <em>Jan Bodnar</em>'s
  * <a href="http://zetcode.com/tutorials/javagamestutorial/tetris/">Tetris game
  * clone in Java Swing</a>.
  * </p>
@@ -118,13 +115,12 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 			Tetromino.Shape.values().length;
 
 	/**
-	 * Delayed Auto Shift or autorepeat refers to the behavior of most falling
-	 * block puzzle games when the player holds the left or right key.
+	 * Delayed Auto Shift or autorepeat refers to the behavior of most falling 
+     * block puzzle games when the player holds the leftKey or rightKey key.
 	 *
-	 * <p>
-	 * The game will shift the falling piece sideways, wait, and then shift it
-	 * repeatedly if the player continues to hold the key.
-	 * </p>
+	 * <p>The game will shift the falling piece sideways, wait, and then shift 
+     * it repeatedly if the player continues to holdKey the key.
+     * </p>
 	 *
 	 * @see <a href="http://tetris.wikia.com/wiki/DAS">Delayed Auto Shift</a>
 	 */
@@ -376,10 +372,9 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	/**
 	 * Count the rotations needed.
 	 *
-	 * <p>
-	 * Negative value stands for left rotations, positive values stands for
-	 * right rotations.
-	 * </p>
+	 * <p>Negative value stands for left rotations, positive values stands 
+     * for right rotations.
+     * </p>
 	 */
 	private int rotationsNeeded = 0;
 	/**
@@ -640,7 +635,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 
 	// Graphical components
 	/**
-	 * Is a refresh of the hold space needed?
+	 * Is a refresh of the holdKey space needed?
 	 * 
 	 * @see #drawHold()
 	 */
@@ -701,27 +696,27 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	 * 
 	 * @see #initInputs()
 	 */
-	private final String themeA = "ctrl 1";
+	private final String themeAKey = "ctrl 1";
 	/**
 	 * Key stroke to switch to Theme B song.
 	 * 
 	 * @see #initInputs()
 	 */
-	private final String themeB = "ctrl 2";
+	private final String themeBKey = "ctrl 2";
 	/**
-	 * Key stroke to pause game.
+	 * Key stroke to start/pause game.
 	 * 
 	 * @see #initInputs()
 	 * @see PauseAction
 	 */
-	private String pause = "ENTER";
+	private String pauseKey = "ENTER";
 	/**
 	 * Key stroke to hold a piece.
 	 * 
 	 * @see #initInputs()
 	 * @see HoldAction
 	 */
-	private String hold = "D";
+	private String holdKey = "D";
 	/**
 	 * Key stroke to shift the falling piece to the left.
 	 * 
@@ -729,7 +724,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	 * @see ShiftLeftAction
 	 * @see ReleaseShiftLeftAction
 	 */
-	private String left = "LEFT";
+	private String leftKey = "LEFT";
 	/**
 	 * Key stroke to shift the falling piece to the right.
 	 * 
@@ -737,7 +732,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	 * @see ShiftRightAction
 	 * @see ReleaseShiftRightAction
 	 */
-	private String right = "RIGHT";
+	private String rightKey = "RIGHT";
 	/**
 	 * Key stroke to soft drop the falling piece.
 	 * 
@@ -745,7 +740,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	 * @see DropSoftAction
 	 * @see ReleaseDropSoftAction
 	 */
-	private String softDrop = "DOWN";
+	private String softDropKey = "DOWN";
 	/**
 	 * Key stroke to hard drop the falling piece.
 	 * 
@@ -753,7 +748,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	 * @see DropHardAction
 	 * @see ReleaseDropHardAction
 	 */
-	private String hardDrop = "UP";
+	private String hardDropKey = "UP";
 	/**
 	 * Key stroke to rotate the falling piece to the left.
 	 * 
@@ -761,7 +756,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	 * @see RotateLeftAction
 	 * @see ReleaseRotateLeftAction
 	 */
-	private String rotateLeft = "A";
+	private String rotateLeftKey = "A";
 	/**
 	 * Key stroke to rotate the falling piece to the right.
 	 * 
@@ -769,7 +764,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	 * @see RotateRightAction
 	 * @see ReleaseRotateRightAction
 	 */
-	private String rotateRight = "Z";
+	private String rotateRightKey = "Z";
 
 	/**
 	 * Default constructor.
@@ -779,8 +774,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	}
 
 	/**
-	 * Constructor of a Tetrion with a status bar, an hold space and preview
-	 * panels.
+	 * Constructor of a Tetrion with a status bar, an hold space and preview 
+     * panels.
 	 * 
 	 * @param label
 	 *            the status bar
@@ -840,7 +835,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 		actionMap.clear();
 		
 		// Change song
-		inputMap.put(KeyStroke.getKeyStroke(themeA), "Theme A");
+		inputMap.put(KeyStroke.getKeyStroke(themeAKey), "Theme A");
 		actionMap.put("Theme A", new AbstractAction("Theme A") {
 			/**
 			 * Default Serial Version ID.
@@ -855,7 +850,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 			}
 		});
 		// Change song
-		inputMap.put(KeyStroke.getKeyStroke(themeB), "Theme B");
+		inputMap.put(KeyStroke.getKeyStroke(themeBKey), "Theme B");
 		actionMap.put("Theme B", new AbstractAction("Theme B") {
 			/**
 			 * Default Serial Version ID.
@@ -870,31 +865,31 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 			}
 		});
 		
-		// Pause
-		if (pause != null && !pause.isEmpty()) {
-			inputMap.put(KeyStroke.getKeyStroke(pause), "PAUSE");
+		// Start/Pause
+		if (pauseKey != null && !pauseKey.isEmpty()) {
+			inputMap.put(KeyStroke.getKeyStroke(pauseKey), "PAUSE");
 		}
 		actionMap.put("PAUSE", new PauseAction("Pause"));
 		
 		// Hold
-		if (hold != null && !hold.isEmpty()) {
-			inputMap.put(KeyStroke.getKeyStroke(hold), "HOLD");
+		if (holdKey != null && !holdKey.isEmpty()) {
+			inputMap.put(KeyStroke.getKeyStroke(holdKey), "HOLD");
 		}
 		actionMap.put("HOLD", new HoldAction("Hold"));
 		
 		// Left
-		if (left != null && !left.isEmpty()) {
-			inputMap.put(KeyStroke.getKeyStroke(left), "LEFT");
-			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + left), 
+		if (leftKey != null && !leftKey.isEmpty()) {
+			inputMap.put(KeyStroke.getKeyStroke(leftKey), "LEFT");
+			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + leftKey), 
 					"RELEASE_LEFT");
 		}
 		actionMap.put("LEFT", new ShiftLeftAction("Left"));
 		actionMap.put("RELEASE_LEFT", 
 				new ReleaseShiftLeftAction("Release Left"));
 		// Right
-		if (right != null && !right.isEmpty()) {
-			inputMap.put(KeyStroke.getKeyStroke(right), "RIGHT");
-			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + right), 
+		if (rightKey != null && !rightKey.isEmpty()) {
+			inputMap.put(KeyStroke.getKeyStroke(rightKey), "RIGHT");
+			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rightKey), 
 					"RELEASE_RIGHT");
 		}
 		actionMap.put("RIGHT", new ShiftRightAction("Right"));
@@ -902,18 +897,18 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 				new ReleaseShiftRightAction("Release Right"));
 		
 		// Down
-		if (softDrop != null && !softDrop.isEmpty()) {
-			inputMap.put(KeyStroke.getKeyStroke(softDrop), "DOWN");
-			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + softDrop), 
+		if (softDropKey != null && !softDropKey.isEmpty()) {
+			inputMap.put(KeyStroke.getKeyStroke(softDropKey), "DOWN");
+			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + softDropKey), 
 					"RELEASE_DOWN");
 		}
 		actionMap.put("DOWN", new DropSoftAction("Down"));
 		actionMap.put("RELEASE_DOWN", 
 				new ReleaseDropSoftAction("Release Down"));
 		// Drop down
-		if (hardDrop != null && !hardDrop.isEmpty()) {
-			inputMap.put(KeyStroke.getKeyStroke(hardDrop), "DROP");
-			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + hardDrop), 
+		if (hardDropKey != null && !hardDropKey.isEmpty()) {
+			inputMap.put(KeyStroke.getKeyStroke(hardDropKey), "DROP");
+			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + hardDropKey), 
 					"RELEASE_DROP");
 		}
 		actionMap.put("DROP", new DropHardAction("Drop"));
@@ -921,18 +916,18 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 				new ReleaseDropHardAction("Release Drop"));
 		
 		// Rotate left
-		if (rotateLeft != null && !rotateLeft.isEmpty()) {
-			inputMap.put(KeyStroke.getKeyStroke(rotateLeft), "ROTATE_LEFT");
-			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rotateLeft), 
+		if (rotateLeftKey != null && !rotateLeftKey.isEmpty()) {
+			inputMap.put(KeyStroke.getKeyStroke(rotateLeftKey), "ROTATE_LEFT");
+			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rotateLeftKey), 
 					"RELEASE_ROTATE_LEFT");
 		}
 		actionMap.put("ROTATE_LEFT", new RotateLeftAction("Rotate Left"));
 		actionMap.put("RELEASE_ROTATE_LEFT", 
 				new ReleaseRotateLeftAction("Release Rotate Left"));
 		// Rotate right
-		if (rotateRight != null && !rotateRight.isEmpty()) {
-			inputMap.put(KeyStroke.getKeyStroke(rotateRight), "ROTATE_RIGHT");
-			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rotateRight), 
+		if (rotateRightKey != null && !rotateRightKey.isEmpty()) {
+			inputMap.put(KeyStroke.getKeyStroke(rotateRightKey), "ROTATE_RIGHT");
+			inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rotateRightKey), 
 					"RELEASE_ROTATE_RIGHT");
 		}
 		actionMap.put("ROTATE_RIGHT", new RotateRightAction("Rotate Right"));
@@ -1034,122 +1029,123 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 
 	// #########################################################################
 	/**
-	 * @return the key stroke to pause game
+	 * @return the key stroke to start/pause the game
 	 */
-	public final synchronized String getPause() {
-		return pause;
+	public final synchronized String getPauseKey() {
+		return pauseKey;
 	}
 
 	/**
-	 * @param pauseKeyStroke the key stroke to pause game
+	 * @param pauseKeyStroke the key stroke to start/pause the game
 	 */
-	public final synchronized void setPause(final String pauseKeyStroke) {
-		this.pause = pauseKeyStroke;
+	public final synchronized void setPauseKey(final String pauseKeyStroke) {
+		this.pauseKey = pauseKeyStroke;
 	}
 
 	/**
 	 * @return the key stroke to hold a piece
 	 */
-	public final synchronized String getHold() {
-		return hold;
+	public final synchronized String getHoldKey() {
+		return holdKey;
 	}
 
 	/**
 	 * @param holdKeyStroke the key stroke to hold a piece
 	 */
-	public final synchronized void setHold(final String holdKeyStroke) {
-		this.hold = holdKeyStroke;
+	public final synchronized void setHoldKey(final String holdKeyStroke) {
+		this.holdKey = holdKeyStroke;
 	}
 
 	/**
 	 * @return the key stroke to shift the falling piece to the left
 	 */
-	public final synchronized String getLeft() {
-		return left;
+	public final synchronized String getLeftKey() {
+		return leftKey;
 	}
 
 	/**
 	 * @param leftKeyStroke
 	 *            the key stroke to shift the falling piece to the left
 	 */
-	public final synchronized void setLeft(final String leftKeyStroke) {
-		this.left = leftKeyStroke;
+	public final synchronized void setLeftKey(final String leftKeyStroke) {
+		this.leftKey = leftKeyStroke;
 	}
 
 	/**
 	 * @return the key stroke to shift the falling piece to the right
 	 */
-	public final synchronized String getRight() {
-		return right;
+	public final synchronized String getRightKey() {
+		return rightKey;
 	}
 
 	/**
-	 * @param rightKeyStroke the right to set
+	 * @param rightKeyStroke
+	 *            the key stroke to shift the falling piece to the right
 	 */
-	public final synchronized void setRight(final String rightKeyStroke) {
-		this.right = rightKeyStroke;
+	public final synchronized void setRightKey(final String rightKeyStroke) {
+		this.rightKey = rightKeyStroke;
 	}
 
 	/**
 	 * @return the key stroke to soft drop the falling piece
 	 */
-	public final synchronized String getSoftDrop() {
-		return softDrop;
+	public final synchronized String getSoftDropKey() {
+		return softDropKey;
 	}
 
 	/**
 	 * @param softDropKeyStroke the key stroke to soft drop the falling piece
 	 */
-	public final synchronized void setSoftDrop(
+	public final synchronized void setSoftDropKey(
 			final String softDropKeyStroke) {
-		this.softDrop = softDropKeyStroke;
+		this.softDropKey = softDropKeyStroke;
 	}
 
 	/**
 	 * @return the key stroke to hard drop the falling piece
 	 */
-	public final synchronized String getHardDrop() {
-		return hardDrop;
+	public final synchronized String getHardDropKey() {
+		return hardDropKey;
 	}
 
 	/**
 	 * @param hardDropKeyStroke the key stroke to hard drop the falling piece
 	 */
-	public final synchronized void setHardDrop(
+	public final synchronized void setHardDropKey(
 			final String hardDropKeyStroke) {
-		this.hardDrop = hardDropKeyStroke;
+		this.hardDropKey = hardDropKeyStroke;
 	}
 
 	/**
 	 * @return the key stroke to rotate the falling piece to the left
 	 */
-	public final synchronized String getRotateLeft() {
-		return rotateLeft;
+	public final synchronized String getRotateLeftKey() {
+		return rotateLeftKey;
 	}
 
 	/**
 	 * @param rotateLeftKeyStroke
 	 *            the key stroke to rotate the falling piece to the left
 	 */
-	public final synchronized void setRotateLeft(
+	public final synchronized void setRotateLeftKey(
 			final String rotateLeftKeyStroke) {
-		this.rotateLeft = rotateLeftKeyStroke;
+		this.rotateLeftKey = rotateLeftKeyStroke;
 	}
 
 	/**
 	 * @return the key stroke to rotate the falling piece to the right
 	 */
-	public final synchronized String getRotateRight() {
-		return rotateRight;
+	public final synchronized String getRotateRightKey() {
+		return rotateRightKey;
 	}
 
 	/**
 	 * @param rotateRightKeyStroke
 	 *            the key stroke to rotate the falling piece to the right
 	 */
-	public final synchronized void setRotateRight(
+	public final synchronized void setRotateRightKey(
 			final String rotateRightKeyStroke) {
-		this.rotateRight = rotateRightKeyStroke;
+		this.rotateRightKey = rotateRightKeyStroke;
 	}
 
 	// #########################################################################
@@ -1343,8 +1339,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	/**
 	 * Set left shift progress.
 	 * 
-	 * <p>
-	 * Resets {@link #shiftDelayCount} to {@code 0}.
+	 * <p>Resets {@link #shiftDelayCount} to {@code 0}.
 	 * </p>
 	 * 
 	 * @param leftShifting
@@ -1368,8 +1363,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	/**
 	 * Set right shift progress.
 	 * 
-	 * <p>
-	 * Resets {@link #shiftDelayCount} to {@code 0}.
+	 * <p>Resets {@link #shiftDelayCount} to {@code 0}.
 	 * </p>
 	 * 
 	 * @param rightShifting
@@ -1393,8 +1387,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	/**
 	 * Set left rotation progress.
 	 * 
-	 * <p>
-	 * Decrease {@link #rotationsNeeded} if {@code true}, resets to {@code 0}
+	 * <p>Decrease {@link #rotationsNeeded} if {@code true}, resets to {@code 0}
 	 * otherwise.
 	 * </p>
 	 * 
@@ -1425,8 +1418,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	/**
 	 * Set right rotation progress.
 	 * 
-	 * <p>
-	 * Increase {@link #rotationsNeeded} if {@code true}, resets to {@code 0}
+	 * <p>Increase {@link #rotationsNeeded} if {@code true}, resets to {@code 0}
 	 * otherwise.
 	 * </p>
 	 * 
@@ -2106,15 +2098,14 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 	/**
 	 * Hold piece.
 	 * 
-	 * <p>
-	 * At any time starting when a {@link Tetromino} enters the
+	 * <p>At any time starting when a {@link Tetromino} enters the
 	 * {@link #playfield} until it locks, the player can press the Hold button
 	 * on the controller to move the active {@link Tetromino} into the hold
-	 * space and move the {@link Tetromino} that was in the hold space to the
-	 * top of the {@link #playfield}. A {@link Tetromino} moved into the hold
-	 * space is unavailable for switching out until the {@link Tetromino} that
-	 * was moved out of the hold space locks.
-	 * </p>
+     * space and move the {@link Tetromino} that was in the hold space to the
+     * top of the {@link #playfield}. A {@link Tetromino} moved into the hold
+     * space is unavailable for switching out until the {@link Tetromino} that
+     * was moved out of the hold space locks.
+     * </p>
 	 * 
 	 * @see <a href="http://tetris.wikia.com/wiki/Hold_piece">Hold piece</a>
 	 */
@@ -2332,7 +2323,7 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
 
 	// #########################################################################
 	/**
-	 * Action to pause the {@link Tetrion}.
+	 * Action to start/pause the {@link Tetrion}.
 	 * 
 	 * @author Mathieu Brunot
 	 */
