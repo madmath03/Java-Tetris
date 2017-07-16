@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
-import org.fun.music.midi_player.MidiPlayer;
+import org.fun.music.midiplayer.MidiPlayer;
 
 /**
  * The Tetrion is the frame that surrounds the playfield and the "machine" that plays Tetris.
@@ -50,7 +50,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(Tetrion.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(Tetrion.class.getName());
 
   /**
    * Fixed frame rate per second.
@@ -751,7 +752,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * @param holdSpace the panel in which to draw the {@link #holdPiece}
    * @param previews the panels in which to draw the {@link #nextShapes}
    */
-  public Tetrion(final JLabel label, final JPanel holdSpace, final JPanel... previews) {
+  public Tetrion(final JLabel label, final JPanel holdSpace,
+      final JPanel... previews) {
     this.setFocusable(true);
     this.setBackground(Color.BLACK.brighter());
     // this.setBorder(new B);
@@ -763,7 +765,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
     this.playfield = new Tetromino.Shape[BOARD_WIDTH * BOARD_HEIGHT];
 
     // Thread to fill the next shapes with Random Generator
-    this.nextShapes = new ArrayBlockingQueue<>(Math.max(SHAPES_QUEUE_SIZE, previews.length), true);
+    this.nextShapes = new ArrayBlockingQueue<>(
+        Math.max(SHAPES_QUEUE_SIZE, previews.length), true);
     this.shapeGenerator = new Thread(() -> {
       try {
         while (true) {
@@ -844,29 +847,34 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
     // Left
     if (leftKey != null && !leftKey.isEmpty()) {
       inputMap.put(KeyStroke.getKeyStroke(leftKey), "LEFT");
-      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + leftKey), "RELEASE_LEFT");
+      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + leftKey),
+          "RELEASE_LEFT");
     }
     actionMap.put("LEFT", new ShiftLeftAction("Left"));
     actionMap.put("RELEASE_LEFT", new ReleaseShiftLeftAction("Release Left"));
     // Right
     if (rightKey != null && !rightKey.isEmpty()) {
       inputMap.put(KeyStroke.getKeyStroke(rightKey), "RIGHT");
-      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rightKey), "RELEASE_RIGHT");
+      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rightKey),
+          "RELEASE_RIGHT");
     }
     actionMap.put("RIGHT", new ShiftRightAction("Right"));
-    actionMap.put("RELEASE_RIGHT", new ReleaseShiftRightAction("Release Right"));
+    actionMap.put("RELEASE_RIGHT",
+        new ReleaseShiftRightAction("Release Right"));
 
     // Down
     if (softDropKey != null && !softDropKey.isEmpty()) {
       inputMap.put(KeyStroke.getKeyStroke(softDropKey), "DOWN");
-      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + softDropKey), "RELEASE_DOWN");
+      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + softDropKey),
+          "RELEASE_DOWN");
     }
     actionMap.put("DOWN", new DropSoftAction("Down"));
     actionMap.put("RELEASE_DOWN", new ReleaseDropSoftAction("Release Down"));
     // Drop down
     if (hardDropKey != null && !hardDropKey.isEmpty()) {
       inputMap.put(KeyStroke.getKeyStroke(hardDropKey), "DROP");
-      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + hardDropKey), "RELEASE_DROP");
+      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + hardDropKey),
+          "RELEASE_DROP");
     }
     actionMap.put("DROP", new DropHardAction("Drop"));
     actionMap.put("RELEASE_DROP", new ReleaseDropHardAction("Release Drop"));
@@ -874,17 +882,21 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
     // Rotate left
     if (rotateLeftKey != null && !rotateLeftKey.isEmpty()) {
       inputMap.put(KeyStroke.getKeyStroke(rotateLeftKey), "ROTATE_LEFT");
-      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rotateLeftKey), "RELEASE_ROTATE_LEFT");
+      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rotateLeftKey),
+          "RELEASE_ROTATE_LEFT");
     }
     actionMap.put("ROTATE_LEFT", new RotateLeftAction("Rotate Left"));
-    actionMap.put("RELEASE_ROTATE_LEFT", new ReleaseRotateLeftAction("Release Rotate Left"));
+    actionMap.put("RELEASE_ROTATE_LEFT",
+        new ReleaseRotateLeftAction("Release Rotate Left"));
     // Rotate right
     if (rotateRightKey != null && !rotateRightKey.isEmpty()) {
       inputMap.put(KeyStroke.getKeyStroke(rotateRightKey), "ROTATE_RIGHT");
-      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rotateRightKey), "RELEASE_ROTATE_RIGHT");
+      inputMap.put(KeyStroke.getKeyStroke(RELEASE_INPUT + rotateRightKey),
+          "RELEASE_ROTATE_RIGHT");
     }
     actionMap.put("ROTATE_RIGHT", new RotateRightAction("Rotate Right"));
-    actionMap.put("RELEASE_ROTATE_RIGHT", new ReleaseRotateRightAction("Release Rotate Right"));
+    actionMap.put("RELEASE_ROTATE_RIGHT",
+        new ReleaseRotateRightAction("Release Rotate Right"));
   }
 
   /**
@@ -1042,7 +1054,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
   /**
    * @param softDropKeyStroke the key stroke to soft drop the falling piece
    */
-  public final synchronized void setSoftDropKey(final String softDropKeyStroke) {
+  public final synchronized void setSoftDropKey(
+      final String softDropKeyStroke) {
     this.softDropKey = softDropKeyStroke;
   }
 
@@ -1056,7 +1069,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
   /**
    * @param hardDropKeyStroke the key stroke to hard drop the falling piece
    */
-  public final synchronized void setHardDropKey(final String hardDropKeyStroke) {
+  public final synchronized void setHardDropKey(
+      final String hardDropKeyStroke) {
     this.hardDropKey = hardDropKeyStroke;
   }
 
@@ -1070,7 +1084,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
   /**
    * @param rotateLeftKeyStroke the key stroke to rotate the falling piece to the left
    */
-  public final synchronized void setRotateLeftKey(final String rotateLeftKeyStroke) {
+  public final synchronized void setRotateLeftKey(
+      final String rotateLeftKeyStroke) {
     this.rotateLeftKey = rotateLeftKeyStroke;
   }
 
@@ -1084,7 +1099,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
   /**
    * @param rotateRightKeyStroke the key stroke to rotate the falling piece to the right
    */
-  public final synchronized void setRotateRightKey(final String rotateRightKeyStroke) {
+  public final synchronized void setRotateRightKey(
+      final String rotateRightKeyStroke) {
     this.rotateRightKey = rotateRightKeyStroke;
   }
 
@@ -1131,8 +1147,9 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
   protected synchronized void setLevel(final int newLevel) {
     this.level = newLevel;
     // Set up gravity (number of cell per frames)
-    this.gravity = Math.min(BOARD_CEILING,
-        Math.pow(this.levelUpSpeedUpRatio, this.level) / (double) FRAME_PER_SECOND);
+    this.gravity =
+        Math.min(BOARD_CEILING, Math.pow(this.levelUpSpeedUpRatio, this.level)
+            / (double) FRAME_PER_SECOND);
     System.out.println("Level " + this.level + " (" + this.gravity + "G)");
   }
 
@@ -1172,7 +1189,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * 
    * @param isInsideDangerZone the new <em>insideDangerZone</em> status
    */
-  protected final synchronized void setInsideDangerZone(final boolean isInsideDangerZone) {
+  protected final synchronized void setInsideDangerZone(
+      final boolean isInsideDangerZone) {
     this.insideDangerZone = isInsideDangerZone;
   }
 
@@ -1231,7 +1249,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * 
    * @param isHardDropping Is hard drop in progress?
    */
-  protected final synchronized void setDroppingHard(final boolean isHardDropping) {
+  protected final synchronized void setDroppingHard(
+      final boolean isHardDropping) {
     this.droppingHard = isHardDropping;
   }
 
@@ -1249,7 +1268,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * 
    * @param isSoftDropping Is soft drop in progress?
    */
-  protected final synchronized void setDroppingSoft(final boolean isSoftDropping) {
+  protected final synchronized void setDroppingSoft(
+      final boolean isSoftDropping) {
     this.droppingSoft = isSoftDropping;
   }
 
@@ -1271,7 +1291,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * 
    * @param leftShifting Is left shift in progress?
    */
-  protected final synchronized void setShiftingLeft(final boolean leftShifting) {
+  protected final synchronized void setShiftingLeft(
+      final boolean leftShifting) {
     this.shiftingLeft = leftShifting;
     this.shiftDelayCount = 0;
   }
@@ -1294,7 +1315,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * 
    * @param rightShifting Is right shift in progress?
    */
-  protected final synchronized void setShiftingRight(final boolean rightShifting) {
+  protected final synchronized void setShiftingRight(
+      final boolean rightShifting) {
     this.shiftingRight = rightShifting;
     this.shiftDelayCount = 0;
   }
@@ -1319,7 +1341,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * 
    * @param isRotatingLeft Is left rotation in progress?
    */
-  protected final synchronized void setRotatingLeft(final boolean isRotatingLeft) {
+  protected final synchronized void setRotatingLeft(
+      final boolean isRotatingLeft) {
     this.rotatingLeft = isRotatingLeft;
     if (rotatingLeft) {
       rotationsNeeded--;
@@ -1348,7 +1371,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * 
    * @param isRotatingRight Is right rotation in progress?
    */
-  protected final synchronized void setRotatingRight(final boolean isRotatingRight) {
+  protected final synchronized void setRotatingRight(
+      final boolean isRotatingRight) {
     this.rotatingRight = isRotatingRight;
     if (rotatingRight) {
       rotationsNeeded++;
@@ -1383,13 +1407,13 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
     } else {
       // Rotation
       if (rotatingLeft && rotationsNeeded < 0) {
-        if (Tetrion.this.tryMove(Tetrion.this.fallingPiece.rotateLeft(), Tetrion.this.curX,
-            Tetrion.this.curY)) {
+        if (Tetrion.this.tryMove(Tetrion.this.fallingPiece.rotateLeft(),
+            Tetrion.this.curX, Tetrion.this.curY)) {
           rotationsNeeded = 0;
         }
       } else if (rotatingRight && rotationsNeeded > 0) {
-        if (Tetrion.this.tryMove(Tetrion.this.fallingPiece.rotateRight(), Tetrion.this.curX,
-            Tetrion.this.curY)) {
+        if (Tetrion.this.tryMove(Tetrion.this.fallingPiece.rotateRight(),
+            Tetrion.this.curX, Tetrion.this.curY)) {
           rotationsNeeded = 0;
         }
       }
@@ -1397,12 +1421,14 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
       // Shift
       if ((shiftingLeft || shiftingRight)
           && ((shiftDelayCount >= 0 && shiftDelayCount++ >= AUTO_SHIFT_DELAY)
-              || (shiftDelayCount < 0 && shiftDelayCount-- >= -AUTO_SHIFT_PERIOD))) {
-        if (shiftingLeft && Tetrion.this.tryMove(Tetrion.this.fallingPiece, Tetrion.this.curX - 1,
-            Tetrion.this.curY)) {
+              || (shiftDelayCount < 0
+                  && shiftDelayCount-- >= -AUTO_SHIFT_PERIOD))) {
+        if (shiftingLeft && Tetrion.this.tryMove(Tetrion.this.fallingPiece,
+            Tetrion.this.curX - 1, Tetrion.this.curY)) {
           shiftDelayCount = -1;
-        } else if (shiftingRight && Tetrion.this.tryMove(Tetrion.this.fallingPiece,
-            Tetrion.this.curX + 1, Tetrion.this.curY)) {
+        } else if (shiftingRight
+            && Tetrion.this.tryMove(Tetrion.this.fallingPiece,
+                Tetrion.this.curX + 1, Tetrion.this.curY)) {
           shiftDelayCount = -1;
         } else {
           shiftDelayCount = 0;
@@ -1434,8 +1460,10 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
     super.paint(g);
     updateStatusBar();
     // Force refresh of hold panel
-    if (refreshHoldPanelNeeded && holdPanel != null && holdPanel.getGraphics() != null) {
-      holdPanel.getGraphics().fillRect(0, 0, holdPanel.getWidth(), holdPanel.getHeight());
+    if (refreshHoldPanelNeeded && holdPanel != null
+        && holdPanel.getGraphics() != null) {
+      holdPanel.getGraphics().fillRect(0, 0, holdPanel.getWidth(),
+          holdPanel.getHeight());
     }
     // Force refresh of each preview panel
     if (refreshPreviewPanelsNeeded && previewPanels != null) {
@@ -1478,14 +1506,14 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * @param squareHeight the blocks height
    * @param boardTop ceiling position
    */
-  private void drawStack(final Graphics g, final int squareWidth, final int squareHeight,
-      final int boardTop) {
+  private void drawStack(final Graphics g, final int squareWidth,
+      final int squareHeight, final int boardTop) {
     for (int y = 0; y < BOARD_CEILING; ++y) {
       for (int x = 0; x < BOARD_WIDTH; ++x) {
         Tetromino.Shape shape = shapeAt(x, BOARD_CEILING - y - 1);
         if (shape != null) {
-          drawSquare(g, 0 + x * squareWidth, boardTop + y * squareHeight, shape, squareWidth,
-              squareHeight);
+          drawSquare(g, 0 + x * squareWidth, boardTop + y * squareHeight, shape,
+              squareWidth, squareHeight);
         }
       }
     }
@@ -1506,8 +1534,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * @param squareHeight the blocks height
    * @param boardTop ceiling position
    */
-  private void drawFallingPiece(final Graphics g, final int squareWidth, final int squareHeight,
-      final int boardTop) {
+  private void drawFallingPiece(final Graphics g, final int squareWidth,
+      final int squareHeight, final int boardTop) {
     if (fallingPiece.getShape() != null) {
       Tetromino.Shape fallingShape = fallingPiece.getShape();
       // Define drop estimated target
@@ -1525,8 +1553,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
         int blockX = curX + fallingPiece.x(i);
         int blockDropY = dropY - fallingPiece.y(i);
         drawSquare(g, 0 + blockX * squareWidth,
-            boardTop + (BOARD_CEILING - blockDropY - 1) * squareHeight, shadowColor, squareWidth,
-            squareHeight);
+            boardTop + (BOARD_CEILING - blockDropY - 1) * squareHeight,
+            shadowColor, squareWidth, squareHeight);
       }
 
       // Draw piece
@@ -1535,8 +1563,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
         int blockX = curX + fallingPiece.x(i);
         int blockY = curY - fallingPiece.y(i);
         drawSquare(g, 0 + blockX * squareWidth,
-            boardTop + (BOARD_CEILING - blockY - 1) * squareHeight, fallingColor, squareWidth,
-            squareHeight);
+            boardTop + (BOARD_CEILING - blockY - 1) * squareHeight,
+            fallingColor, squareWidth, squareHeight);
       }
     }
   }
@@ -1548,7 +1576,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * @see #refreshHoldPanelNeeded
    */
   private void drawHold() {
-    if (!refreshHoldPanelNeeded || holdPanel == null || holdPiece.getShape() == null) {
+    if (!refreshHoldPanelNeeded || holdPanel == null
+        || holdPiece.getShape() == null) {
       return;
     }
     Tetromino.Shape holdShape = holdPiece.getShape();
@@ -1561,8 +1590,10 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
       } else {
         color = holdShape.getShadowColor();
       }
-      drawSquare(holdPanel.getGraphics(), (1 + holdShape.x(j)) * panelSquareWidth,
-          (1 + holdShape.y(j)) * panelSquareHeight, color, panelSquareWidth, panelSquareHeight);
+      drawSquare(holdPanel.getGraphics(),
+          (1 + holdShape.x(j)) * panelSquareWidth,
+          (1 + holdShape.y(j)) * panelSquareHeight, color, panelSquareWidth,
+          panelSquareHeight);
     }
     refreshHoldPanelNeeded = false;
   }
@@ -1588,8 +1619,10 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
       int panelSquareWidth = squareWidth(previewPanel, Tetromino.BLOCKS);
       int panelSquareHeight = squareHeight(previewPanel, Tetromino.BLOCKS);
       for (int j = 0; j < Tetromino.BLOCKS; ++j) {
-        drawSquare(previewPanel.getGraphics(), (1 + shape.x(j)) * panelSquareWidth,
-            (1 + shape.y(j)) * panelSquareHeight, shape, panelSquareWidth, panelSquareHeight);
+        drawSquare(previewPanel.getGraphics(),
+            (1 + shape.x(j)) * panelSquareWidth,
+            (1 + shape.y(j)) * panelSquareHeight, shape, panelSquareWidth,
+            panelSquareHeight);
       }
     }
     refreshPreviewPanelsNeeded = false;
@@ -1606,7 +1639,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * @param squareHeight the blocks height in pixels
    */
   protected static void drawSquare(final Graphics g, final int x, final int y,
-      final Tetromino.Shape shape, final int squareWidth, final int squareHeight) {
+      final Tetromino.Shape shape, final int squareWidth,
+      final int squareHeight) {
     drawSquare(g, x, y, shape.getColor(), squareWidth, squareHeight);
   }
 
@@ -1620,8 +1654,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * @param squareWidth the blocks width in pixels
    * @param squareHeight the blocks height in pixels
    */
-  protected static void drawSquare(final Graphics g, final int x, final int y, final Color color,
-      final int squareWidth, final int squareHeight) {
+  protected static void drawSquare(final Graphics g, final int x, final int y,
+      final Color color, final int squareWidth, final int squareHeight) {
     g.setColor(color);
     g.fillRect(x + 1, y + 1, squareWidth - 2, squareHeight - 2);
 
@@ -1630,8 +1664,10 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
     g.drawLine(x, y, x + squareWidth - 1, y);
 
     g.setColor(color.darker());
-    g.drawLine(x + 1, y + squareHeight - 1, x + squareWidth - 1, y + squareHeight - 1);
-    g.drawLine(x + squareWidth - 1, y + squareHeight - 1, x + squareWidth - 1, y + 1);
+    g.drawLine(x + 1, y + squareHeight - 1, x + squareWidth - 1,
+        y + squareHeight - 1);
+    g.drawLine(x + squareWidth - 1, y + squareHeight - 1, x + squareWidth - 1,
+        y + 1);
   }
 
   /**
@@ -1641,7 +1677,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * @param panelSquareWidth the panel's width in blocks
    * @return the blocks width in pixels
    */
-  private static int squareWidth(final JPanel panel, final int panelSquareWidth) {
+  private static int squareWidth(final JPanel panel,
+      final int panelSquareWidth) {
     return (int) panel.getSize().getWidth() / panelSquareWidth;
   }
 
@@ -1661,7 +1698,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * @param panelSquareHeight the panel's height in blocks
    * @return the blocks height in pixels
    */
-  private static int squareHeight(final JPanel panel, final int panelSquareHeight) {
+  private static int squareHeight(final JPanel panel,
+      final int panelSquareHeight) {
     return (int) panel.getSize().getHeight() / panelSquareHeight;
   }
 
@@ -1717,8 +1755,9 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
     this.setLevel(startLevel);
     this.clear();
 
-    if (MIDI_PLAYER != null && (MIDI_PLAYER.isStopped() || MIDI_PLAYER.isPaused()
-        || MIDI_PLAYER.getCurrentSongIndex() == 0 || MIDI_PLAYER.getCurrentSongIndex() > 2)) {
+    if (MIDI_PLAYER != null && (MIDI_PLAYER.isStopped()
+        || MIDI_PLAYER.isPaused() || MIDI_PLAYER.getCurrentSongIndex() == 0
+        || MIDI_PLAYER.getCurrentSongIndex() > 2)) {
       MIDI_PLAYER.startPlaying(1);
       MIDI_PLAYER.setLooping(true);
     }
@@ -1757,7 +1796,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
     }
     // Setup refresh status
     refreshHoldPanelNeeded = holdPanel != null;
-    refreshPreviewPanelsNeeded = this.previewPanels != null && this.previewPanels.length > 0;
+    refreshPreviewPanelsNeeded =
+        this.previewPanels != null && this.previewPanels.length > 0;
     if (MIDI_PLAYER != null) {
       if (!MIDI_PLAYER.isStopped()) {
         MIDI_PLAYER.pausePlaying();
@@ -1860,8 +1900,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
     framesSinceLastDrop = 0;
     fallingPiece.setShape(null);
 
-    refreshHoldPanelNeeded =
-        holdPanel != null && (holdPieceAvailable != (holdPiece.getShape() != null));
+    refreshHoldPanelNeeded = holdPanel != null
+        && (holdPieceAvailable != (holdPiece.getShape() != null));
     holdPieceAvailable = holdPiece.getShape() != null;
 
     int removedLines = removeFullLines();
@@ -1869,7 +1909,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
     if (MIDI_PLAYER != null) {
       insideDangerZone = false;
       for (int i = (BOARD_HEIGHT * BOARD_WIDTH) - 1, n =
-          BOARD_CEILING_DANGER_ZONE * BOARD_WIDTH; i > n && !insideDangerZone; --i) {
+          BOARD_CEILING_DANGER_ZONE * BOARD_WIDTH; i > n
+              && !insideDangerZone; --i) {
         insideDangerZone = playfield[i] != null;
       }
       if (insideDangerZone) {
@@ -2029,7 +2070,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * @param newY the new {@code Y} position for the given piece
    * @return {@code true} if the given piece can be moved at the given position
    */
-  private boolean isMoveable(final Tetromino piece, final int newX, final int newY) {
+  private boolean isMoveable(final Tetromino piece, final int newX,
+      final int newY) {
     for (int i = 0; i < Tetromino.BLOCKS; ++i) {
       int x = newX + piece.x(i);
       int y = newY - piece.y(i);
@@ -2071,7 +2113,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
    * @param newY the new {@code Y} position for the given piece
    * @return {@code true} if the given piece was moved at the given position
    */
-  private boolean tryMove(final Tetromino piece, final int newX, final int newY) {
+  private boolean tryMove(final Tetromino piece, final int newX,
+      final int newY) {
     int finalNewX = newX;
     int finalNewY = newY;
 
@@ -2082,14 +2125,16 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
       int newWidth = piece.getWidth();
 
       if (newX >= 0 && newX <= BOARD_WIDTH - newWidth - 1) {
-        for (int x = newX + 1, l = newX + newWidth - 1; x < l && !isMoveable; x++) {
+        for (int x = newX + 1, l = newX + newWidth - 1; x < l
+            && !isMoveable; x++) {
           if (isMoveable(piece, x, newY)) {
             finalNewX = x;
             isMoveable = true;
           }
         }
       } else if (newX >= newWidth - 1 && newX <= BOARD_WIDTH - 1) {
-        for (int x = newX - 1, l = newX - newWidth - 1; x > l && !isMoveable; x--) {
+        for (int x = newX - 1, l = newX - newWidth - 1; x > l
+            && !isMoveable; x--) {
           if (isMoveable(piece, x, newY)) {
             finalNewX = x;
             isMoveable = true;
@@ -2102,7 +2147,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
       // Handle floor kick
       int newHeight = piece.getHeight();
       if (newY >= 0 && newY <= BOARD_HEIGHT - newHeight - 1) {
-        for (int y = newY + 1, l = newY + newHeight; y < l && !isMoveable; y++) {
+        for (int y = newY + 1, l = newY + newHeight; y < l
+            && !isMoveable; y++) {
           if (isMoveable(piece, newX, y)) {
             finalNewY = y;
             isMoveable = true;
@@ -2295,7 +2341,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
       if (!started || fallingPiece.getShape() == null || paused) {
         return;
       }
-      Tetrion.this.tryMove(Tetrion.this.fallingPiece, Tetrion.this.curX - 1, Tetrion.this.curY);
+      Tetrion.this.tryMove(Tetrion.this.fallingPiece, Tetrion.this.curX - 1,
+          Tetrion.this.curY);
     }
   }
 
@@ -2395,7 +2442,8 @@ public class Tetrion extends JPanel implements ActionListener, Closeable {
       if (!started || fallingPiece.getShape() == null || paused) {
         return;
       }
-      Tetrion.this.tryMove(Tetrion.this.fallingPiece, Tetrion.this.curX + 1, Tetrion.this.curY);
+      Tetrion.this.tryMove(Tetrion.this.fallingPiece, Tetrion.this.curX + 1,
+          Tetrion.this.curY);
     }
   }
 

@@ -1,4 +1,4 @@
-package org.fun.music.midi_player;
+package org.fun.music.midiplayer;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,7 +53,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(MidiPlayer.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(MidiPlayer.class.getName());
 
   /**
    * MIDI meta event for end of track.
@@ -113,7 +114,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
   /**
    * Reverse default comparator for playlist resources.
    */
-  public static final Comparator<Object> REVERSE_COMPARATOR = Collections.reverseOrder(COMPARATOR);
+  public static final Comparator<Object> REVERSE_COMPARATOR =
+      Collections.reverseOrder(COMPARATOR);
 
   // #########################################################################
   /**
@@ -122,7 +124,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @param songResource the song resource
    * @param song the song's MIDI sequence
    */
-  protected static void printSongInfo(final Object songResource, final Sequence song) {
+  protected static void printSongInfo(final Object songResource,
+      final Sequence song) {
     printSongInfo(System.out, songResource, song);
   }
 
@@ -133,8 +136,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @param songResource the song resource
    * @param song the song's MIDI sequence
    */
-  protected static void printSongInfo(final PrintStream ps, final Object songResource,
-      final Sequence song) {
+  protected static void printSongInfo(final PrintStream ps,
+      final Object songResource, final Sequence song) {
     String songInfo;
     if (songResource instanceof Path) {
       songInfo = getSongInfo((Path) songResource, song);
@@ -157,7 +160,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @param song the song's MIDI sequence
    * @return a string describing a song path.
    */
-  public static String getSongInfo(final Path songResource, final Sequence song) {
+  public static String getSongInfo(final Path songResource,
+      final Sequence song) {
     // Get file name
     String fileName = songResource.getFileName().toString();
 
@@ -171,7 +175,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @param song the song's MIDI sequence
    * @return a string describing a song file.
    */
-  public static String getSongInfo(final File songResource, final Sequence song) {
+  public static String getSongInfo(final File songResource,
+      final Sequence song) {
     // Get file name
     String fileName = songResource.getName();
 
@@ -185,7 +190,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @param song the song's MIDI sequence
    * @return a string describing a song URL.
    */
-  public static String getSongInfo(final URL songResource, final Sequence song) {
+  public static String getSongInfo(final URL songResource,
+      final Sequence song) {
     // Get file name
     String url = songResource.toString();
     String fileName = url.substring(url.lastIndexOf('/') + 1);
@@ -200,7 +206,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @param song the song's MIDI sequence
    * @return a string describing a song's resource.
    */
-  public static String getSongInfo(final InputStream songResource, final Sequence song) {
+  public static String getSongInfo(final InputStream songResource,
+      final Sequence song) {
     // Get file name
     String fileName = songResource.toString();
 
@@ -214,7 +221,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @param song the song's MIDI sequence
    * @return a string describing a song's resource.
    */
-  public static String getSongInfo(final Object songResource, final Sequence song) {
+  public static String getSongInfo(final Object songResource,
+      final Sequence song) {
     // Get file name
     String fileName = songResource.toString();
 
@@ -245,7 +253,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @param song the song's MIDI sequence
    * @return a string describing a song's resource.
    */
-  private static String getSongInfo(final String fileName, final Sequence song) {
+  private static String getSongInfo(final String fileName,
+      final Sequence song) {
     if (song == null) {
       return fileName;
     }
@@ -540,7 +549,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * 
    * @return {@code true} if the MIDI player actually started playing
    */
-  public final boolean startPlaying(final Collection<? extends Object> resources) {
+  public final boolean startPlaying(
+      final Collection<? extends Object> resources) {
     if (this.addAll(resources)) {
       return this.startPlaying();
     } else {
@@ -686,8 +696,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
     // Retrieve MIDI Sequencer
     Sequencer player = this.getSequencer();
 
-    return playingThread != null && playingThread.isAlive() && player.getSequence() != null
-        && player.isRunning();
+    return playingThread != null && playingThread.isAlive()
+        && player.getSequence() != null && player.isRunning();
   }
 
   /**
@@ -805,7 +815,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @return the current song's MIDI resource, {@code null} if no song currently playing
    */
   protected final Object getCurrentSongResource() {
-    if (this.currentSongIndex < 0 || this.currentSongIndex >= this.playlist.size()) {
+    if (this.currentSongIndex < 0
+        || this.currentSongIndex >= this.playlist.size()) {
       return null;
     }
     this.currentSongResource = this.playlist.get(this.currentSongIndex);
@@ -881,10 +892,11 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @return {@code true} if the elements were moved, {@code false} if the {@code position} is
    *         between {@code start} and {@code end}
    */
-  public boolean moveSongsTo(final int start, final int end, final int position) {
+  public boolean moveSongsTo(final int start, final int end,
+      final int position) {
     if (start > end) {
-      throw new IllegalArgumentException(
-          "Start (" + start + ") must be lesser or equal to end (" + end + ") index.");
+      throw new IllegalArgumentException("Start (" + start
+          + ") must be lesser or equal to end (" + end + ") index.");
     }
     if (position >= start && position <= end) {
       return false;
@@ -905,7 +917,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
     Collections.rotate(subList, distance);
 
     // Update current song index
-    if (this.currentSongIndex >= rotationStart && this.currentSongIndex <= rotationEnd) {
+    if (this.currentSongIndex >= rotationStart
+        && this.currentSongIndex <= rotationEnd) {
       int offset;
       if (this.currentSongIndex >= start && this.currentSongIndex <= end) {
         int direction;
@@ -1101,7 +1114,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @throws IndexOutOfBoundsException if the index is out of range
    *         (<tt>index &lt; 0 || index &gt; size()</tt>)
    */
-  public boolean addAll(final int index, final Collection<? extends Object> resources) {
+  public boolean addAll(final int index,
+      final Collection<? extends Object> resources) {
     if (resources == null || resources.isEmpty()) {
       return false;
     }
@@ -1183,7 +1197,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
    * @param removed was the resources removed?
    * @return {@code true} if the post remove actions were done
    */
-  protected boolean afterRemove(final Object removedResource, final boolean removed) {
+  protected boolean afterRemove(final Object removedResource,
+      final boolean removed) {
     if (!removed) {
       return false;
     }
@@ -1387,8 +1402,10 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
         playSequence((InputStream) resource);
       } else {
         MidiPlayer.this.stopPlaying();
-        MidiPlayer.LOGGER.log(Level.SEVERE, "Impossible to read resource: {0}", resource);
-        MidiPlayer.this.reportThrowable("Impossible to read resource: " + resource, null);
+        MidiPlayer.LOGGER.log(Level.SEVERE, "Impossible to read resource: {0}",
+            resource);
+        MidiPlayer.this
+            .reportThrowable("Impossible to read resource: " + resource, null);
       }
     }
 
@@ -1405,7 +1422,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
         playSequence(song);
       } catch (IOException | InvalidMidiDataException ex) {
         MidiPlayer.this.stopPlaying();
-        MidiPlayer.LOGGER.log(Level.SEVERE, "Impossible to read URL: " + url, ex);
+        MidiPlayer.LOGGER.log(Level.SEVERE, "Impossible to read URL: " + url,
+            ex);
         MidiPlayer.this.reportThrowable("Impossible to read URL: " + url, ex);
       }
     }
@@ -1423,7 +1441,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
         playSequence(song);
       } catch (IOException | InvalidMidiDataException ex) {
         MidiPlayer.this.stopPlaying();
-        MidiPlayer.LOGGER.log(Level.SEVERE, "Impossible to read file: " + file, ex);
+        MidiPlayer.LOGGER.log(Level.SEVERE, "Impossible to read file: " + file,
+            ex);
         MidiPlayer.this.reportThrowable("Impossible to read file: " + file, ex);
       }
     }
@@ -1441,8 +1460,10 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
         playSequence(song);
       } catch (IOException | InvalidMidiDataException ex) {
         MidiPlayer.this.stopPlaying();
-        MidiPlayer.LOGGER.log(Level.SEVERE, "Impossible to read InputStream: " + is, ex);
-        MidiPlayer.this.reportThrowable("Impossible to read InputStream: " + is, ex);
+        MidiPlayer.LOGGER.log(Level.SEVERE,
+            "Impossible to read InputStream: " + is, ex);
+        MidiPlayer.this.reportThrowable("Impossible to read InputStream: " + is,
+            ex);
       }
     }
 
@@ -1453,7 +1474,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
      * @throws InvalidMidiDataException if the sequence contains invalid MIDI data, or is not
      *         supported.
      */
-    private void playSequence(final Sequence song) throws InvalidMidiDataException {
+    private void playSequence(final Sequence song)
+        throws InvalidMidiDataException {
       sequencer.setSequence(song);
 
       printSongInfo(currentResource, song);
@@ -1474,7 +1496,8 @@ public class MidiPlayer implements MetaEventListener, AutoCloseable {
             // Get current song to play
             this.currentResource = MidiPlayer.this.getCurrentSongResource();
             if (this.currentResource == null) {
-              System.out.println("No songs to play. Stopping thread and player...");
+              System.out
+                  .println("No songs to play. Stopping thread and player...");
               return;
             }
 

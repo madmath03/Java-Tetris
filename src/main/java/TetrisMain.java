@@ -37,7 +37,8 @@ public final class TetrisMain {
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(TetrisMain.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(TetrisMain.class.getName());
 
   /**
    * Hidden constructor.
@@ -70,7 +71,8 @@ public final class TetrisMain {
           break;
         }
       }
-    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+    } catch (ClassNotFoundException | InstantiationException
+        | IllegalAccessException
         | javax.swing.UnsupportedLookAndFeelException ex) {
       LOGGER.log(java.util.logging.Level.SEVERE, null, ex);
     }

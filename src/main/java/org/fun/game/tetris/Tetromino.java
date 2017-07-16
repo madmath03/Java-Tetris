@@ -110,7 +110,8 @@ public class Tetromino {
       /**
        * All shapes available to the generator.
        */
-      private static final List<Shape> ALL_SHAPES = Arrays.asList(Shape.values());
+      private static final List<Shape> ALL_SHAPES =
+          Arrays.asList(Shape.values());
 
       /**
        * Random Generator's current bag of shapes.
@@ -149,7 +150,8 @@ public class Tetromino {
     /**
      * Random Tetromino index generator.
      */
-    private static final RandomGenerator RANDOM_GENERATOR = new RandomGenerator();
+    private static final RandomGenerator RANDOM_GENERATOR =
+        new RandomGenerator();
 
     /**
      * Get next shape from <em>Random Generator</em>.
@@ -341,7 +343,8 @@ public class Tetromino {
    * @param dimension a given dimension's index
    * @param position the new dimension's coordinate of given block index
    */
-  private void setCoord(final int block, final int dimension, final int position) {
+  private void setCoord(final int block, final int dimension,
+      final int position) {
     blocks[block][dimension] = position;
   }
 
